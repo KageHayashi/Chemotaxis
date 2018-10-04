@@ -17,22 +17,51 @@ void draw() {
 }
 
 class thing {
-  int myX, myY;
+  double myX, myY;
+  double randomWalkf;
+  double randomWalkb;
   int myColor;
   
   thing() {
     myX = 250;
     myY = 250;
+   randomWalkf = Math.random()*5;
+   randomWalkb = Math.random()*-5;
   }
   
   void walk() {
-    myX = myX + (int)(Math.random()*10-5);
-    myY = myY + (int)(Math.random()*10-5);
-    myColor = color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
+    if (myX <= mouseX) {
+      myX = myX + randomWalkf;
+      //myY = myY + (int)(Math.random()*5);
+      myColor = color((int)(Math.random()*255),(int)(Math.random()*255),(int)(Math.random()*255));
+    }
+    else if (myX >= mouseX) {
+      myX = myX + randomWalkb;
+      //myY = myY + (int)(Math.random()*-5);
+    }
+    if (myY <= mouseY) {
+      //myX = myX + (int)(Math.random()*5);
+      myY = myY + randomWalkf;
+    }
+    else if (myY >= mouseY) {
+      //myX = myX + (int)(Math.random()*-5);
+      myY = myY + randomWalkb;
+    }
+  } 
+  
+  void tele() {
+    randomWalkf = 10;
+    randomWalkb = 10;
   }
   
   void show() {
-    fill(myColor);
-    ellipse(myX,myY,10,10);
+    fill(255);
+    ellipse((float)myX,(float)myY,10,10);
+    }
+}
+
+void mousePressed() {
+  for (int i = 0; i < alpha.length; i++) {
+    alpha[i].tele();
   }
 }
